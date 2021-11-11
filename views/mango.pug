@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1= title
-  - var results = [{"types":"Alphonso", "taste": "sweet","cost":20},{"types":"totapuri", "taste": "bitter","cost":10},{"types":"kesar", "taste": "sour","cost":15}]
+   - let mango=results 
   div(class="container-fuild")
     div(class="row")
       each result,index in results
