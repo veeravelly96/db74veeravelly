@@ -1,0 +1,44 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  form(id='mangoForm', action="/resource/resource/mangos", method="POST") 
+    div.form-group 
+        label.mangoAttr(for='types') mango type 
+        input#mango_type(type='text', name='types') 
+    div.form-group 
+        label.mangoAttr(for='taste') mango tatse 
+        input#size(type='text', name='taste') 
+    div.form-group 
+        label.mangoAttr(for='cost') mango cost 
+        input#cost(type='number', name='cost')
+
+    button(class="btn btn-danger m-2" onclick="createeOnid()") Create 
+    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel 
+ 
+  script. 
+    function cancel() { 
+      // Go back to the home page for the mango collection 
+      window.location.href='/mangos' 
+    }  
+ 
+  script. 
+    function createOnid() {  
+    document.forms['mangoForm'].addEventListener('submit', (event) => { 
+      event.preventDefault(); 
+      // TODO do something here to show user that form is being submitted 
+      fetch(event.target.action, { 
+        method: 'POST', 
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+      }).then((resp) => { 
+        return resp.text(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Save succeded") 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Save failed " + error ) 
+      }); 
+    });
+    }

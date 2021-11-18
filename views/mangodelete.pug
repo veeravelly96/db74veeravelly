@@ -1,0 +1,53 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  if (toShow == null) 
+    h2 No instance to delete 
+  else 
+    - let mangoid = toShow._id 
+    - let mango_type = toShow.types 
+    - let mangotatse = toShow.taste 
+    - let mangocost = toShow.cost 
+    - let actionid = "/resource/resource/mangos/" + mangoid 
+    script let actionid = "#{actionid}" 
+    div 
+      div.row 
+        div(class='mangoAttr mr-3') mango ID is: 
+        div #{mangoid} 
+      div.row 
+        div(class='mangoAttr mr-3') mango Type is: 
+        div #{mango_type} 
+      div.row 
+        div(class='mangoAttr mr-3') mango Size is: 
+        div #{mangotatse} 
+      div.row 
+        div(class='mangoAttr mr-3') mango Cost is: 
+        div #{mangocost} 
+ 
+    button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete 
+    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel 
+ 
+  script. 
+    function cancel() { 
+      // Go back to the home page for the mango collection 
+      window.location.href='/mangos' 
+    } 
+  script. 
+    function deleteOnid() { 
+      console.log("starting delete") 
+      // delete first 
+      fetch(actionid, { 
+        method: 'DELETE'      
+      }).then((resp) => { 
+        return resp.text(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Delete succeded") 
+        window.location.href='/mangos' 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Delete failed " + error ) 
+      }); 
+    } 

@@ -18,12 +18,3 @@ router.get('/resource/mangos/:id', mango_controller.mango_detail);
 // GET request for list of all mango items.
 router.get('/resource/mangos', mango_controller.mango_list);
 module.exports = router;
-// API for our resources
-exports.api = function(req, res) {
-res.write('[');
-res.write('{"resource":"mangos", ');
-res.write(' "verbs":["GET","PUT", "DELETE"] ');
-res.write('}');
-res.write(']')
-res.send();
-};

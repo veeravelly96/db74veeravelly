@@ -1,0 +1,22 @@
+extends layout 
+ 
+block content 
+  h1= title 
+  - let mangoid = toShow._id 
+  - let mango_type = toShow.types 
+  - let mangotaste = toShow.taste 
+  - let mangocost = toShow.cost 
+  
+  div 
+    div.row 
+      div(class='mangoAttr mr-3') mango ID is: 
+      div #{mangoid} 
+    div.row 
+      div(class='mangoAttr mr-3') mango Type is: 
+      div #{mango_type} 
+    div.row 
+      div(class='mangoAttr mr-3') mango Size is: 
+      div #{mangotaste} 
+    div.row 
+      div(class='mangoAttr mr-3') mango Cost is: 
+      div #{mangocost} 
