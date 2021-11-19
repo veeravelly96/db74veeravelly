@@ -4,14 +4,17 @@ block content
   h1= title
    - let mango=results 
   div(class="container-fuild")
-    div(class="row")
+    div(class="row m-1")
       each result,index in results
+       - let destination = `dispatch(\"/mango/update?id=${result._id}\")`
         div(class = "col-sm-2" id=index onclick=`buy(${index})`) 
           p #{result.types}
           p #{result.taste}
           p #{result.cost}
-
+          button.btn( class="btn-primary" class="btn-toolbar", onclick= destination) Update
   script.
-    function buy(element){
-      alert(`You purchased item ${element+1}.`)
+    function dispatch(path){
+      window.location.href=path
     }
+
+    
