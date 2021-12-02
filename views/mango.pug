@@ -2,19 +2,33 @@ extends layout
 
 block content
   h1= title
-   - let mango=results 
+  - let createView = `dispatch(\"mango/create\")`
+  button.btn(class="btn-primary m1-2", onclick=createView) Create
+  - let results = themangos
   div(class="container-fuild")
-    div(class="row m-1")
-      each result,index in results
-       - let destination = `dispatch(\"/mango/update?id=${result._id}\")`
-        div(class = "col-sm-2" id=index onclick=`buy(${index})`) 
-          p #{result.types}
-          p #{result.taste}
-          p #{result.cost}
-          button.btn( class="btn-primary" class="btn-toolbar", onclick= destination) Update
+    div(class="row")
+      each item in results
+       - let updateView = `dispatch(\"/mango/update?id=${item._id}\")`
+       - let detailView = `dispatch(\"/mango/detail?id=${item._id}\")`
+       - let deleteView = `dispatch(\"/mango/delete?id=${item._id}\")`
+        div(class="row-sm-2", class="m-1") Item is #{item.itemname} with price is #{item.price} and quantity is #{item.quantity} </br>
+         button.btn(class="btn-primary ml-2", onclick= updateView) Update
+         button.btn(class="btn-primary ml-2", onclick= detailView) Detail
+         button.btn(class="btn-danger ml-2", onclick= deleteView) Delete
+
   script.
     function dispatch(path){
       window.location.href=path
     }
 
-    
+//-
+      each result,index in results
+        div(class = "col-sm-2" id=index onclick=`buy(${index})`) 
+          p #{result.itemname}
+          p #{result.price}
+          p #{result.quantity}
+              
+  script.
+    function buy(element){
+      alert(`You purchased item is ${element+1}.`)
+    }

@@ -13,6 +13,9 @@ block content
     div.form-group 
         label.mangoAttr(for='cost') mango cost 
         input#cost(type='number', name='cost')
+    div.form-group 
+        label.phramacyAttr(for='quantity') mango quantity
+        input#size(type='number', name='quantity',value=quantity min=0, max=2)
 
     button(class="btn btn-danger m-2" onclick="createeOnid()") Create 
     button(class="btn btn-secondary m-2" onclick="cancel()") Cancel 
